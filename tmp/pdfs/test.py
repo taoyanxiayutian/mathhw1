@@ -11,7 +11,7 @@ sys.stderr.reconfigure(encoding='utf-8')
 ROOT = Path(__file__).resolve().parents[2]
 BUILD = Path(__file__).resolve().parent
 parser = argparse.ArgumentParser(description='将作业 Markdown 排版为 PDF，自动调用 XeLaTeX 编译两次。')
-parser.add_argument('--source', type=Path, default=ROOT / 'paper1b.md', help='输入 Markdown 文件；默认读取项目目录中的 paper1b.md')
+parser.add_argument('--source', type=Path, default=ROOT / 'mathhw2/paper2a.md', help='输入 Markdown 文件；默认读取项目目录中的 paper2a.md')
 parser.add_argument('--output', type=Path, help='输出 PDF 路径；默认 output/pdf/输入文件名.pdf')
 parser.add_argument('--xelatex', default=shutil.which('xelatex'), help='xelatex.exe 的完整路径；默认从 PATH 查找')
 parser.add_argument('--tex-only', action='store_true', help='只生成 LaTeX 源文件，不编译 PDF')
@@ -60,7 +60,7 @@ preamble = r'''\documentclass[UTF8,a4paper,zihao=5,fontset=windows]{ctexart}
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\fontsize{8}{10}\selectfont\color{muted}高等数值计算方法实验}
-\fancyhead[R]{\fontsize{8}{10}\selectfont\color{muted}Runge 函数拟合}
+\fancyhead[R]{\fontsize{8}{10}\selectfont\color{muted}数值积分}
 \fancyfoot[C]{\fontsize{9}{11}\selectfont\color{muted}\thepage\ /\ \pageref*{LastPage}}
 \renewcommand{\headrulewidth}{0.3pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -73,9 +73,9 @@ preamble = r'''\documentclass[UTF8,a4paper,zihao=5,fontset=windows]{ctexart}
 \begin{document}
 \fontsize{10.5}{15.5}\selectfont
 \begin{center}
-{\heiti\fontsize{17}{23}\selectfont Runge 函数的三次曲线拟合}\par
+{\heiti\fontsize{17}{23}\selectfont 数值积分}\par
 \vspace{4pt}
-{\fontsize{10}{14}\selectfont 高等数值计算方法实验报告\quad 作业 1B}
+{\fontsize{10}{14}\selectfont 高等数值计算方法实验报告\quad 作业 2A}
 \end{center}
 \vspace{2pt}
 '''
