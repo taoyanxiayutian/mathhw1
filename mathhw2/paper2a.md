@@ -12,6 +12,7 @@
 
 $$
 u=\ln x,\quad \mathrm dv=x^{1/2}\mathrm dx,\quad\quad \mathrm du=\frac1x\mathrm dx,\quad v=\frac23x^{3/2}.
+
 $$
 
 于是
@@ -20,32 +21,29 @@ $$
 \begin{aligned}
 I&=\int_0^1x^{1/2}\ln x\,\mathrm dx\\
 &=\left.\frac23x^{3/2}\ln x\right|_0^1-\frac23\int_0^1x^{1/2}\,\mathrm dx\\
-&=0-\left.\frac49x^{3/2}\right|_0^1=-\frac49.
+&=0-\left.\frac49x^{3/2}\right|_0^1 \\
+&=-\frac49.
 \end{aligned}
-$$
 
-因此该定积分的精确值为 $\boxed{I=-\frac49}$ 。
+$$
 
 ### 2.2 复合梯形公式推导
 
 #### 2.2.1 单区间梯形公式
 
-在区间 $[a,b]$ 上，用经过端点 $(a,f(a))$ 、$(b,f(b))$ 的一次插值多项式 $P_1(x)$ 近似 $f(x)$：
-
-$$
-P_1(x)=f(a)\frac{b-x}{b-a}+f(b)\frac{x-a}{b-a}.
-$$
-
-对它积分：
-
+在区间 $[a,b]$ 上，用经过端点 $(a,f(a))$ 、$(b,f(b))$ 的一次插值多项式 $P_1(x)=f(a)\frac{b-x}{b-a}+f(b)\frac{x-a}{b-a}$ 近似 $f(x)$, 对 $P_1(x)$ 积分
 
 $$
 \int_a^bP_1(x)\,\mathrm dx
 =\frac{f(a)}{b-a}\int_a^b(b-x)\,\mathrm dx + \frac{f(b)}{b-a}\int_a^b(x-a)\,\mathrm dx=\frac{b-a}{2}[f(a)+f(b)]
+
 $$
+
 则
+
 $$
 \boxed{\int_a^bf(x)\,\mathrm dx\approx\frac{b-a}{2}[f(a)+f(b)]}.
+
 $$
 
 #### 2.2.2 复合梯形公式
@@ -56,24 +54,28 @@ $$
 
 $$
 \int_{x_i}^{x_{i+1}}f(x)\,\mathrm dx\approx\frac h2[f(x_i)+f(x_{i+1})].
+
 $$
 
 对全部小区间求和：
 
 $$
 I_T(h)\approx\frac h2\sum_{i=0}^{n-1}[f(x_i)+f(x_{i+1})].
+
 $$
 
 展开后，内部节点各出现两次，首末节点各出现一次，整理得
 
 $$
 \boxed{ I_T(h)=h\left[ \frac12f(x_0)+\sum_{i=1}^{n-1}f(x_i)+\frac12f(x_n)\right]. }
+
 $$
 
 本题 $x_i=ih,\quad f(0)=f(1)=0$，所以
 
 $$
 \boxed{I_T(h)=h\sum_{i=1}^{n-1}\sqrt{ih}\ln(ih)}.
+
 $$
 
 #### 2.2.3 梯形公式误差
@@ -82,58 +84,48 @@ $$
 
 $$
 E_T(h)=I-I_T(h)=-\frac{(b-a)h^2}{12}f''(\xi),\quad \xi\in(a,b),
-$$
-
-故通常有 $E_T(h)=O(h^2)$。
-
-但本题
 
 $$
-f'(x)=\frac{\ln x+2}{2\sqrt{x}},\qquad f''(x)=-\frac{\ln x}{4x^{3/2}}.
-$$
 
-当 $x\to0^+$ 时，二阶导数无界，因此 $f\notin C^2[0,1]$。经典误差定理的前提不成立，实际收敛阶应根据实验结果判断。
+因此在相应光滑性条件下具有二阶精度，即通常有 $E_T(h)=O(h^2)$。
+
+但本题$ f'(x)=\frac{\ln x+2}{2\sqrt{x}},\qquad f''(x)=-\frac{\ln x}{4x^{3/2}}.$ 那么当 $x\to0^+ $ 时，$f''(x)$ 无界，经典误差定理的前提不成立，实际收敛阶应根据实验结果判断。
 
 ### 2.3 复合辛普森公式推导
 
 #### 2.3.1 单组辛普森公式
 
-取区间 $[a,b]$上三个等距节点
+取区间 $[a,b]$上三个等距节点 $ x_0=a,\quad x_1=\frac{a+b}{2},\quad x_2=b,\quad h=\frac{b-a}{2}. $
 
-$$
-x_0=a,\quad x_1=\frac{a+b}{2},\quad x_2=b,\quad h=\frac{b-a}{2}.
-$$
-
-用二次拉格朗日插值多项式
-
-$$
-P_2(x)=f(x_0)L_0(x)+f(x_1)L_1(x)+f(x_2)L_2(x)
-$$
-
-逼近函数，其中
+用二次拉格朗日插值多项式 $ P_2(x)=f(x_0)L_0(x)+f(x_1)L_1(x)+f(x_2)L_2(x)$ 逼近函数，其中
 
 $$
 L_0(x)=\frac{(x-x_1)(x-x_2)}{(x_0-x_1)(x_0-x_2)},
+
 $$
 
 $$
 L_1(x)=\frac{(x-x_0)(x-x_2)}{(x_1-x_0)(x_1-x_2)},
+
 $$
 
 $$
 L_2(x)=\frac{(x-x_0)(x-x_1)}{(x_2-x_0)(x_2-x_1)}.
+
 $$
 
 令 $x=x_0+ht$ ，则 $t\in[0,2]$，三个基函数化为
 
 $$
 L_0(t)=\frac{(t-1)(t-2)}2,\quad L_1(t)=-t(t-2),\quad L_2(t)=\frac{t(t-1)}2.
+
 $$
 
 其积分分别为
 
 $$
 \int_0^2L_0(t)\,\mathrm dt=\frac13,\quad \int_0^2L_1(t)\,\mathrm dt=\frac43,\quad \int_0^2L_2(t)\,\mathrm dt=\frac13.
+
 $$
 
 由于 $\mathrm dx=h\,\mathrm dt$，
@@ -144,6 +136,7 @@ $$
 &=h\int_0^2P_2(x_0+ht)\,\mathrm dt\\
 &=\frac h3[f(x_0)+4f(x_1)+f(x_2)].
 \end{aligned}
+
 $$
 
 又因 $2h=b-a$，可写为
@@ -154,6 +147,7 @@ $$
 \frac{b-a}{6}\left[
 f(a)+4f\left(\frac{a+b}{2}\right)+f(b)
 \right]}.
+
 $$
 
 #### 2.3.2 复合辛普森公式
@@ -168,6 +162,7 @@ $$
 \approx\frac h3[&f(x_{2j})+4f(x_{2j+1})\\
 &+f(x_{2j+2})].
 \end{aligned}
+
 $$
 
 将 $n/2$ 组的公式相加：端点系数为 \(1\)，奇数下标节点系数为 \(4\)，内部偶数下标节点系数为 \(2\)。因此
@@ -181,6 +176,7 @@ f(x_0)+f(x_n)\\
 &+2\sum_{\substack{i=2\\i\text{为偶数}}}^{n-2}f(x_i)
 \bigg].
 \end{aligned}}
+
 $$
 
 本题首末端点函数值均为零，故
@@ -194,6 +190,7 @@ I_S(h)=\frac h3\bigg[&
 &+2\sum_{\substack{i=2\\i\text{为偶数}}}^{n-2}
 \sqrt{ih}\ln(ih)\bigg].
 \end{aligned}}
+
 $$
 
 #### 2.3.3 辛普森公式误差
@@ -202,6 +199,7 @@ $$
 
 $$
 I-I_S(h)=-\frac{(b-a)h^4}{180}f^{(4)}(\xi),\quad \xi\in(a,b),
+
 $$
 
 因此通常有 $E_S(h)=O(h^4)$。对光滑函数而言，步长减半时，误差通常约缩小到原来的 $1/16$。
@@ -214,20 +212,23 @@ $$
 
 $$
 \boxed{E_T(h)=\left|I_T(h)+\frac49\right|}, \qquad \boxed{E_S(h)=\left|I_S(h)+\frac49\right|}.
+
 $$
 
 取
 
 $$
 n=4,8,16,32,64,128,256,512,1024,2048,4096,\quad h=\frac1n.
+
 $$
 
-所有 $ n $均为偶数，满足复合辛普森公式的使用条件。
+所有 $ n $ 均为偶数，满足复合辛普森公式的使用条件。
 
 相邻两次计算的实验收敛阶定义为
 
 $$
 \boxed{p=\frac{\ln(E(h)/E(h/2))}{\ln2}}.
+
 $$
 
 若误差满足 $E(h)\approx Ch^p$，则该式可用于估计实际收敛阶。
@@ -393,6 +394,7 @@ $n$             $h$                 梯形公式绝对误差               辛�
 
 $$
 p_T\approx\log_2(2.62)\approx1.39,\qquad p_S\approx\log_2(2.65)\approx1.41.
+
 $$
 
 这与光滑函数下的二阶、四阶理论阶数不同，说明端点非光滑性影响了实际收敛表现。当前测试中辛普森公式的误差更小，但不应据此宣称本题具有四阶收敛。
@@ -407,6 +409,7 @@ $$
 
 $$
 _{\mathrm{total}}(h)\approx E_{\mathrm{trunc}}(h)+E_{\mathrm{round}}(h).
+
 $$
 
 截断误差通常随步长减小而下降，但舍入误差不会无限减小。
@@ -425,6 +428,7 @@ $$
 
 $$
 \int_0^1\sqrt{x}\ln x\,\mathrm dx=-\frac49.
+
 $$
 
 实验表明，随着步长减小，两种方法的绝对误差均逐渐下降；在本次测试范围内，辛普森公式取得了更小的绝对误差。从理论上看，梯形公式对于二阶导数连续的函数通常具有二阶精度，辛普森公式对于四阶导数连续的函数通常具有四阶精度。但本题被积函数在 $x=0$ 处不满足这些高阶光滑性条件，因此实际收敛阶不能直接由经典误差定理确定。

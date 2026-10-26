@@ -11,7 +11,7 @@ sys.stderr.reconfigure(encoding='utf-8')
 ROOT = Path(__file__).resolve().parents[2]
 BUILD = Path(__file__).resolve().parent
 parser = argparse.ArgumentParser(description='将作业 Markdown 排版为 PDF，自动调用 XeLaTeX 编译两次。')
-parser.add_argument('--source', type=Path, default=ROOT / 'mathhw2/paper2a.md', help='输入 Markdown 文件；默认读取项目目录中的 paper1b.md')
+parser.add_argument('--source', type=Path, default=ROOT / 'mathhw2/2a.md', help='输入 Markdown 文件；默认读取项目目录中的 paper1b.md')
 parser.add_argument('--output', type=Path, help='输出 PDF 路径；默认 output/pdf/输入文件名.pdf')
 parser.add_argument('--xelatex', default=shutil.which('xelatex'), help='xelatex.exe 的完整路径；默认从 PATH 查找')
 parser.add_argument('--tex-only', action='store_true', help='只生成 LaTeX 源文件，不编译 PDF')
