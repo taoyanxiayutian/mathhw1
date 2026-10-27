@@ -168,14 +168,8 @@ $$
 将 $n/2$ 组的公式相加：端点系数为 \(1\)，奇数下标节点系数为 \(4\)，内部偶数下标节点系数为 \(2\)。因此
 
 $$
-\boxed{
-\begin{aligned}
-I_S(h)=\frac h3\bigg[&
-f(x_0)+f(x_n)\\
-&+4\sum_{\substack{i=1\\i\text{为奇数}}}^{n-1}f(x_i)\\
-&+2\sum_{\substack{i=2\\i\text{为偶数}}}^{n-2}f(x_i)
-\bigg].
-\end{aligned}}
+I_S(h)=\frac h3\bigg[
+f(x_0)+f(x_n)+4\sum_{\substack{i=1\\i\text{为奇数}}}^{n-1}f(x_i)+2\sum_{\substack{i=2\\i\text{为偶数}}}^{n-2}f(x_i)\bigg].
 
 $$
 
@@ -183,13 +177,7 @@ $$
 
 $$
 \boxed{
-\begin{aligned}
-I_S(h)=\frac h3\bigg[&
-4\sum_{\substack{i=1\\i\text{为奇数}}}^{n-1}
-\sqrt{ih}\ln(ih)\\
-&+2\sum_{\substack{i=2\\i\text{为偶数}}}^{n-2}
-\sqrt{ih}\ln(ih)\bigg].
-\end{aligned}}
+I_S(h)=\frac h3\bigg[ 4\sum_{\substack{i=1\\i\text{为奇数}}}^{n-1} \sqrt{ih}\ln(ih)+2\sum_{\substack{i=2\\i\text{为偶数}}}^{n-2} \sqrt{ih}\ln(ih)\bigg]. }
 
 $$
 
@@ -211,7 +199,7 @@ $$
 设精确值 $ I=-4/9$，梯形与辛普森近似值分别为$ I_T(h)$ 、$ I_S(h)$ 。绝对误差定义为
 
 $$
-\boxed{E_T(h)=\left|I_T(h)+\frac49\right|}, \qquad \boxed{E_S(h)=\left|I_S(h)+\frac49\right|}.
+\boxed{E_T(h)=\left|I_T(h)-I\right|}, \qquad \boxed{E_S(h)=\left|I_S(h)-I\right|}.
 
 $$
 
@@ -285,8 +273,7 @@ I_exact = -4.0 / 9.0
 absolute_error(I_approx) = abs(I_approx - I_exact)
 
 # 主实验
-n_values = [4, 8, 16, 32, 64, 128,
-            256, 512, 1024, 2048, 4096]
+n_values = [4, 8, 16, 32, 64, 128, 256, 512,1024, 2048, 4096, 8192, 16384, 32768]
 
 trap_errors = Float64[]
 simpson_errors = Float64[]
@@ -348,36 +335,9 @@ TyPlot.grid(true)
 
 ## 五、实验结果
 
-下表为参考结果。正式提交时，应以 MWORKS 实际运行输出为准。
-
----
-
-$n$             $h$                 梯形公式绝对误差               辛普森公式绝对误差
--------------------------------------------------------------------------------------
-
-4              0.25   $8.6340\times10^{-2}$   $4.8661\times10^{-2}$
-
-8             0.125   $3.6354\times10^{-2}$   $1.9692\times10^{-2}$
-
-16            0.0625   $1.4970\times10^{-2}$   $7.8417\times10^{-3}$
-
-32           0.03125   $6.0550\times10^{-3}$   $3.0833\times10^{-3}$
-
-64          0.015625   $2.4138\times10^{-3}$   $1.2000\times10^{-3}$
-
-128         0.0078125   $9.5079\times10^{-4}$   $4.6313\times10^{-4}$
-
-256        0.00390625   $3.7081\times10^{-4}$   $1.7748\times10^{-4}$
-
-512       0.001953125   $1.4341\times10^{-4}$   $6.7606\times10^{-5}$
-1024      0.0009765625   $5.5066\times10^{-5}$   $2.5620\times10^{-5}$
-
-2048     0.00048828125   $2.1015\times10^{-5}$   $9.6651\times10^{-6}$
-
-4096    0.000244140625   $7.9777\times10^ {-6}$   $3.6318\times10^ {-6}$
-
----
-
+下两图为实验结果
+![](fig2a1.png)
+![](fig2a2.png)
 两种方法的误差均随步长减小而下降；在本次测试范围内，辛普森公式的误差始终小于梯形公式。
 
 ## 六、实验结果分析
